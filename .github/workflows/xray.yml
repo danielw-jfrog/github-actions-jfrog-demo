@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.JF_USER }}
           password: ${{ secrets.JF_PASSWORD }}
 
-      - name: Run the JFrog CLI commands
+      - name: Setup the JFrog CLI
         uses: jfrog/setup-jfrog-cli@v3
         env:
           # JFrog platform url (for example: https://acme.jfrog.io) 
@@ -42,6 +42,9 @@ jobs:
           # Basic authentication credentials
           JF_USER: ${{ secrets.JF_USER }}
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
-      - run: |
+
+      - name: Run the JFrog CLI commands
+        run: |
           jf rt ping
           docker build -t proservices.jfrog.io/danielw-docker-local/test-image:${{github.run_number}} .
+          jfrog rt dp proservices.jfrog.io/danielw-docker-local/test-image:${{github.run_number}} danielw-docker-local --build-name=test-docker --build-number=${{github.run_number}}

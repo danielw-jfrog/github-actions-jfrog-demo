@@ -44,4 +44,4 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
       - run: |
           jf rt ping
-          docker build -t ${{ secrets.JF_URL }}/danielw-docker-local/test-image:${{github.run_number}} .
+          docker build -t proservices.jfrog.io/danielw-docker-local/test-image:${{github.run_number}} .

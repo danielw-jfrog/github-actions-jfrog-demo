@@ -45,8 +45,8 @@ jobs:
 
       - name: Run the JFrog CLI commands
         run: |
-          jf rt ping
-          docker build -t proservices.jfrog.io/danielw-docker-local/test-image:${{github.run_number}} .
+          jfrog rt ping
+          jfrog docker build -t proservices.jfrog.io/danielw-docker-local/test-image:${{github.run_number}} .
           jfrog rt dp proservices.jfrog.io/danielw-docker-local/test-image:${{github.run_number}} danielw-docker-local --build-name=test-docker --build-number=${{github.run_number}}
           jfrog rt bp test-docker ${{github.run_number}}
-          jf bs test-docker ${{github.run_number}}
+          jfrog bs test-docker ${{github.run_number}}

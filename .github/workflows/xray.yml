@@ -33,7 +33,8 @@ jobs:
           username: ${{ secrets.JF_USER }}
           password: ${{ secrets.JF_PASSWORD }}
 
-      - uses: jfrog/setup-jfrog-cli@v3
+      - name: Run the JFrog CLI commands
+        uses: jfrog/setup-jfrog-cli@v3
         env:
           # JFrog platform url (for example: https://acme.jfrog.io) 
           JF_URL: ${{ secrets.JF_URL }}
@@ -43,3 +44,4 @@ jobs:
           JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
       - run: |
           jf rt ping
+          docker build -t ${{ secrets.JF_URL }}/danielw-docker-local/test-image:${{github.run_number}} .
